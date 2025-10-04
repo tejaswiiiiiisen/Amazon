@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Crimson Cart - Shop Now</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #C00000;
+            --secondary-black: #000000;
+            --dark-grey: #333333;
+            --light-grey: #f4f4f4;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--white);
+            background-color: var(--secondary-black);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-red);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button, .btn-shop-now, .btn-add-to-cart, .btn-subscribe {
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover, .btn-shop-now:hover, .btn-add-to-cart:hover, .btn-subscribe:hover {
+            background-color: #A00000;
+            transform: translateY(-2px);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .main-header {
+            background-color: var(--secondary-black);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-top-bar {
+            background-color: var(--primary-red);
+            color: var(--white);
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-weight: 600;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-red);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--dark-grey);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+            z-index: 1;
+            border-radius: 5px;
+            overflow: hidden;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: var(--white);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--primary-red);
+            color: var(--white);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icons a {
+            color: var(--white);
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .nav-icons a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-icons .fa-shopping-cart span {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: var(--primary-red);
+            color: var(--white);
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            line-height: 1;
+        }
+
+        .hero-section {
+            position: relative;
+            background: none;
+            background-color: var(--secondary-black);
+            overflow: hidden;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 0;
+        }
+
+        #hero-video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        .featured-products {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--secondary-black);
+        }
+
+        .featured-products h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-red);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background-color: var(--dark-grey);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(192, 0, 0, 0.3);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .product-card h3 {
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .product-card .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+        }
+
+        .about-section {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--secondary-black);
+        }
+
+        .about-section h1 {
+            font-size: 3.5rem;
+            color: var(--primary-red);
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-section h1::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--white);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+
+        .why-choose-us {
+            background-color: var(--primary-red);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .why-choose-us h2 {
+            color: var(--white);
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-item {
+            color: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-item i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .newsletter-signup {
+            background-color: var(--secondary-black);
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid var(--dark-grey);
+        }
+
+        .newsletter-signup h2 {
+            font-size: 2.2rem;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+        }
+
+        .newsletter-signup p {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input[type="email"] {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--dark-grey);
+            border-radius: 5px;
+            background-color: #1a1a1a;
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .newsletter-form input[type="email"]::placeholder {
+            color: #888;
+        }
+
+        .btn-subscribe {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+        }
+
+        .main-footer {
+            background-color: var(--secondary-black);
+            padding: 60px 0 20px;
+            border-top: 1px solid var(--dark-grey);
+            color: var(--white);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary-red);
+        }
+
+        .footer-column p {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .footer-column ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            background: var(--primary-red);
+            left: 0;
+            bottom: -2px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .footer-column ul li a:hover::after {
+            width: 100%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: var(--white);
+            font-size: 1.3rem;
+            width: 35px;
+            height: 35px;
+            background-color: var(--dark-grey);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-red);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                margin-top: 15px;
+                gap: 10px;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-icons {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .product-grid, .features-grid, .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .btn-subscribe {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">Amazon</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li class="dropdown">
+                    <!-- <a href="#">Categories <i class="fas fa-caret-down"></i></a> -->
+                    <div class="dropdown-content">
+                        <a href="#">Electronics</a>
+                        <a href="#">Apparel</a>
+                        <a href="#">Home Decor</a>
+                    </div>
+                </li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+                <a href="#"><i class="fas fa-shopping-cart"></i><span>0</span></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <video autoplay muted loop id="hero-video-bg">
+                <source src="D:\javaass\collage project\Amazon The Great Indian Diwali Sale, 26, 27, 28 October - Amazon India (1080p, h264).mp4" type="video/mp4">
+            </video>
+            <div class="hero-content">
+                <h1>Unleash Your Style</h1>
+                <p>Discover the latest trends and exclusive collections.</p>
+                <a href="#" class="btn-shop-now">Shop Now</a>
+            </div>
+        </section>
+
+        <section class="featured-products">
+            <h2>Featured Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="pro7.jpeg" alt="Product 1">
+                    <h3>Sustainable tires for BMW X5 Plug-in Hybrid: BMW</h3>
+                    <p class="price">₹50.00</p>
+                    <button class="btn-add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="pro8.jpeg" alt="Product 2">
+                    <h3>Bedroom Furniture| Home Interior design</h3>
+                    <p class="price">₹30.000</p>
+                    <button class="btn-add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="pro3.jpeg" alt="Product 3">
+                    <h3>Designer Backpack</h3>
+                    <p class="price">₹3.5L</p>
+                    <button class="btn-add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="pro4.jpg" alt="Product 4">
+                    <h3>BMW Special Sales
+The new BMW 7 Protection: Models ...</h3>
+                    <p class="price">₹52.60L</p>
+                    <button class="btn-add-to-cart">Add to Cart</button>
+                </div>
+                  <div class="product-card">
+                    <img src="pro10.webp" alt="Product 4">
+                    <h3>1:18-Scale Yenko-Inspired Chevrolet Muscle Car Diecast Cars</h3>
+                    <p class="price">₹82.60L</p>
+                    <button class="btn-add-to-cart">Add to Cart</button>
+                </div>
+                  <div class="product-card">
+                    <img src="pro11.jpeg" alt="Product 4">
+                    <h3>maruti swzuki</h3>
+                    <p class="price">₹12.2L</p>
+                    <button class="btn-add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="container">
+                <h1>About Amazon Shopping</h1>
+                <div class="about-content">
+                    <p>Amazon Shopping is one of the largest online marketplaces in India. It started in 2013 and offers a wide range of products such as mobiles, electronics, fashion, books, groceries, and home items. Customers can shop 24/7 from their phones or computers.</p>
+                    <p>It also provides fast delivery, easy returns, and secure payments. With Amazon Prime, users get free one-day or two-day delivery and access to movies and music. Amazon supports local Indian sellers so that customers can buy both Indian and international products in one place.</p>
+                    <p>Our mission is to be Earth's most customer-centric company, where customers can find and discover anything they might want to buy online.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-choose-us">
+            <div class="container">
+                <h2>Why Choose Us?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-truck-fast"></i>
+                        <h3>Fast Shipping</h3>
+                        <p>Get your orders delivered quickly and reliably.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-star"></i>
+                        <h3>Quality Products</h3>
+                        <p>Hand-picked items for the best quality and performance.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-headset"></i>
+                        <h3>24/7 Support</h3>
+                        <p>Our dedicated team is always here to help you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter-signup">
+            <div class="container">
+                <h2>Get Exclusive Offers!</h2>
+                <p>Subscribe to our newsletter for the latest updates and discounts.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn-subscribe">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-column">
+                <h3>Amazon</h3>
+                <p>Your one-stop shop for premium products.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Order Tracking</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>My Account</h3>
+                <ul>
+                    <li><a href="#">Sign In</a></li>
+                    <li><a href="#">View Cart</a></li>
+                    <li><a href="#">My Wishlist</a></li>
+                    <li><a href="#">Compare Products</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Amazon All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
